@@ -9,9 +9,9 @@ public class Puzzle {
 	Vector<Squar> v = new Vector();
 
 	public Puzzle() {
-		this.tt = new Squar(5, 5);
-//		this.type = (int) (1000000 * Math.random() % 2 + 1);
-		this.type = 2;
+		this.tt = new Squar(2, 8);
+		this.type = (int) (1000000 * Math.random() % 7 + 1);
+//		this.type = 2;
 		this.v = ininV();
 	}
 
@@ -142,8 +142,8 @@ public class Puzzle {
 		for (int i = 0; i < this.v.size(); i++) {
 			Squar sq = this.v.elementAt(i);
 			if (b[sq.getX()][sq.getY()] == false) {
-				System.out.println("Day");
-				sq.display();
+//				System.out.println("Day");
+//				sq.display();
 				return false;
 			}
 				
@@ -154,7 +154,7 @@ public class Puzzle {
 	public void display() {
 		for (int i = 0; i < this.v.size(); i++) {
 			Squar sq = this.v.elementAt(i);
-			System.out.print("(" + (sq.getX() - tt.getX()) + ", " + (sq.getY() - tt.getY()) + ") ");
+			System.out.print("(" + (sq.getX()) + ", " + (sq.getY()) + ") ");
 		}
 		System.out.println("(" + tt.getX() + ", " + tt.getY() + ") ");
 	}
