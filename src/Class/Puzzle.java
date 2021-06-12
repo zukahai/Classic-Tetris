@@ -5,14 +5,24 @@ import java.util.Vector;
 
 public class Puzzle {
 	int type = 0;
+	int ic = 0;
 	Squar tt = new Squar();
 	Vector<Squar> v = new Vector();
 
 	public Puzzle() {
 		this.tt = new Squar(2, 8);
 		this.type = (int) (1000000 * Math.random() % 7 + 1);
+		this.ic = (int) (1000000 * Math.random() % 6 + 1);
 //		this.type = 2;
 		this.v = ininV();
+	}
+
+	public int getIc() {
+		return ic;
+	}
+
+	public void setIc(int ic) {
+		this.ic = ic;
 	}
 
 	public Vector<Squar> ininV() {
@@ -187,6 +197,14 @@ public class Puzzle {
 		this.v = v;
 	}
 
+	public int initIc(int N) {
+		int k = 0;
+		do {
+			k = (int) (1000000 * Math.random() % 6 + 1);
+		} while (k == N);
+		return k;
+	}
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Puzzle p = new Puzzle();

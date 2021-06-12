@@ -33,13 +33,16 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 	boolean die = false;
 	JButton bt[][] = new JButton[M + 5][N + 5];
 	boolean b[][] = new boolean[M + 5][N + 5];
+	int preCl = 0;
+	Color cl[] = {Color.black, Color.blue, Color.cyan, Color.green, Color.magenta, Color.orange, Color.yellow};
 	Puzzle p = new Puzzle();
 	public ClassicJigsawPuzzle() {
 		super("HaiZuka");
 		cn = init();
-		timer = new Timer(200, new ActionListener() {
+		timer = new Timer(300, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				p.down();
+//				p.display();
 				if (!p.check(b))
 					newPuzz();
 				update();
@@ -55,14 +58,15 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 		pn.setLayout(new GridLayout(M, N));
 		
 		for (int i = 0; i < M + 5; i++)
-			for (int j = 0; j < N + 5; j++)
-				b[i][j] = false;
+			for (int j = 0; j < N + 5; j++) {
+				b[i][j]  = false;
+			}
 		
 		for (int i = 0; i <= M + 4; i++)
 			for (int j = 0; j <= N + 4; j++) {
 				bt[i][j] = new JButton();
 				bt[i][j].addKeyListener(this);
-				bt[i][j].setActionCommand(String.valueOf(i * N + j));
+				bt[i][j].setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.gray));
 			}
 		for (int i = 0; i < 3; i++)
 			for (int j = 3; j < N + 3; j++)
@@ -70,17 +74,17 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 		for (int i = 3; i < M + 3; i++)
 			for (int j = 3; j < N + 3; j++) {
 				b[i][j] = true;
+				bt[i][j].setBackground(cl[0]);
 				pn.add(bt[i][j]);
 			}
-		update();
 		cn.add(pn);
-		
 		this.setVisible(true);
 		this.setSize(400, 700);
 		this.setLocationRelativeTo(null);
 //		this.setResizable(false);
 		return cn;
 	}
+	
 	
 	public void update() {
 		for (int i = M + 2; i >= 1; i--) {
@@ -96,17 +100,18 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 					b[0][j] = true;
 			}
 		}
+		
 		for (int i = 3; i < M + 3; i++)
 			for (int j = 3; j < N + 3; j++)
 				if (b[i][j])
-					bt[i][j].setBackground(Color.white);
-				else
-					bt[i][j].setBackground(Color.red);
+					bt[i][j].setBackground(cl[0]);
+		
 		Vector<Squar> vP = p.getV();
 		for (int i = 0; i < vP.size(); i++) {
 			Squar sq = vP.elementAt(i);
-			bt[sq.getX()][sq.getY()].setBackground(Color.GREEN);
+			bt[sq.getX()][sq.getY()].setBackground(cl[p.getIc()]);
 		}
+		preCl = p.getIc();
 	}
 	
 	public static void main(String[] args) {
@@ -127,9 +132,10 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 			b[sq.getX()][sq.getY()] = false;
 		}
 		p = new Puzzle();
+		p.setIc(p.initIc(preCl));
+		preCl = p.getIc();
 		if (!p.check(b)) {
 			p.display();
-			JOptionPane.showMessageDialog(null, "Thua");
 			timer.stop();
 			die = true;
 		}
