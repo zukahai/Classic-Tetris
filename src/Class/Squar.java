@@ -38,8 +38,12 @@ public class Squar {
 		return new Squar(this.getX() - SQ.getX(), this.getY() - SQ.getY());
 	}
 	
-	public Squar turn() {
+	public Squar turnR() {
 		return new Squar(this.y, -this.x);
+	}
+	
+	public Squar turnL() {
+		return new Squar(-this.y, this.x);
 	}
 	
 	public void display() {

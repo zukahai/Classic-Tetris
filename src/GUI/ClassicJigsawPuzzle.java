@@ -28,8 +28,9 @@ import Class.Squar;
 public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 	Container cn;
 	JPanel pn;
-	int M = 10, N = 10;
-	JButton bt[][] = new JButton[M + 1][N + 1];
+	int M = 22, N = 11;
+	JButton bt[][] = new JButton[M + 5][N + 5];
+	boolean b[][] = new boolean[M + 5][N + 5];
 	Puzzle p = new Puzzle();
 	public ClassicJigsawPuzzle() {
 		super("HaiZuka");
@@ -42,26 +43,34 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 		pn = new JPanel();
 		pn.setLayout(new GridLayout(M, N));
 		
-		for (int i = 0; i < M; i++)
-			for (int j = 0; j < N; j++) {
+		for (int i = 0; i < M + 5; i++)
+			for (int j = 0; j < N + 5; j++)
+				b[i][j] = false;
+		
+		for (int i = 0; i <= M + 4; i++)
+			for (int j = 0; j <= N + 4; j++) {
 				bt[i][j] = new JButton();
 				bt[i][j].addKeyListener(this);
 				bt[i][j].setActionCommand(String.valueOf(i * N + j));
+			}
+		for (int i = 3; i < M + 3; i++)
+			for (int j = 3; j < N + 3; j++) {
+				b[i][j] = true;
 				pn.add(bt[i][j]);
 			}
 		update();
 		cn.add(pn);
 		
 		this.setVisible(true);
-		this.setSize(500, 500);
+		this.setSize(400, 700);
 		this.setLocationRelativeTo(null);
 //		this.setResizable(false);
 		return cn;
 	}
 	
 	public void update() {
-		for (int i = 0; i < M; i++)
-			for (int j = 0; j < N; j++)
+		for (int i = 3; i < M + 3; i++)
+			for (int j = 3; j < N + 3; j++)
 				bt[i][j].setBackground(Color.white);
 		Vector<Squar> vP = p.getV();
 		for (int i = 0; i < vP.size(); i++) {
@@ -84,7 +93,22 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getKeyCode() == e.VK_UP) {
-			p.turn();
+			p.turnRight();
+			if (!p.check(b)) {
+				
+			}
+			update();
+		} else if (e.getKeyCode() == e.VK_DOWN) {
+			p.down();
+			if (!p.check(b)) {
+				p.up();
+			}
+			update();
+		} else if (e.getKeyCode() == e.VK_LEFT) {
+			p.left();
+			update();
+		} else if (e.getKeyCode() == e.VK_RIGHT) {
+			p.right();
 			update();
 		}
 	}
