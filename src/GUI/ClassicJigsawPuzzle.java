@@ -79,8 +79,10 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 			}
 		cn.add(pn);
 		this.setVisible(true);
-		this.setSize(400, 700);
+		this.setSize(395, 700);
 		this.setLocationRelativeTo(null);
+
+		setResizable(false);
 //		this.setResizable(false);
 		return cn;
 	}
@@ -94,8 +96,10 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 					kt = false;
 			if (kt) {
 				for (int h = i; h >= 1; h--)
-					for (int j = 3; j < N + 3; j++)
+					for (int j = 3; j < N + 3; j++) {
 						b[h][j] = b[h - 1][j];
+						bt[h][j].setBackground(bt[h - 1][j].getBackground());
+					}
 				for (int j = 3; j < N + 3; j++)
 					b[0][j] = true;
 			}
