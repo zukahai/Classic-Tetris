@@ -79,7 +79,7 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 			}
 		cn.add(pn);
 		this.setVisible(true);
-		this.setSize(395, 700);
+		this.setSize(386, 700);
 		this.setLocationRelativeTo(null);
 
 		setResizable(false);
