@@ -11,7 +11,7 @@ public class Puzzle {
 	public Puzzle() {
 		this.tt = new Squar(5, 5);
 //		this.type = (int) (1000000 * Math.random() % 2 + 1);
-		this.type = 7;
+		this.type = 2;
 		this.v = ininV();
 	}
 
@@ -56,23 +56,109 @@ public class Puzzle {
 		return vii;
 	}
 
-	public void turn() {
-		if (type != 1)
-			this.v = turnV();
+	public void turnRight() {
+		if (type != 1) {
+			Vector<Squar> tV = new Vector<>();
+			for (int i = 0; i < this.v.size(); i++) {
+				Squar sq = this.v.elementAt(i);
+//				sq.display();
+				sq = sq.sub(tt);
+//				sq.display();
+				sq = sq.turnR();
+//				sq.display();
+				sq = sq.add(tt);
+//				sq.display();
+//				System.out.println("-----------");
+				tV.add(sq);
+			}
+			this.v = tV;
+		}
 	}
-
-	public Vector<Squar> turnV() {
+	
+	public void turnLeft() {
+		if (type != 1) {
+			Vector<Squar> tV = new Vector<>();
+			for (int i = 0; i < this.v.size(); i++) {
+				Squar sq = this.v.elementAt(i);
+//				sq.display();
+				sq = sq.sub(tt);
+//				sq.display();
+				sq = sq.turnL();
+//				sq.display();
+				sq = sq.add(tt);
+//				sq.display();
+//				System.out.println("-----------");
+				tV.add(sq);
+			}
+			this.v = tV;
+		}
+	}
+	
+	public void down() {
+		this.tt = this.tt.add(new Squar(1, 0));
 		Vector<Squar> tV = new Vector<>();
 		for (int i = 0; i < this.v.size(); i++) {
 			Squar sq = this.v.elementAt(i);
-			Squar temp = sq.sub(tt);
-			sq = temp.turnR();
-			sq = sq.add(tt);
+			sq = sq.add(new Squar(1, 0));
 			tV.add(sq);
 		}
-		return tV;
+		this.v = tV;
+	}
+	
+	public void up() {
+		this.tt = this.tt.sub(new Squar(1, 0));
+		Vector<Squar> tV = new Vector<>();
+		for (int i = 0; i < this.v.size(); i++) {
+			Squar sq = this.v.elementAt(i);
+			sq = sq.sub(new Squar(1, 0));
+			tV.add(sq);
+		}
+		this.v = tV;
+	}
+	
+	public void right() {
+		this.tt = this.tt.add(new Squar(0, 1));
+		Vector<Squar> tV = new Vector<>();
+		for (int i = 0; i < this.v.size(); i++) {
+			Squar sq = this.v.elementAt(i);
+			sq = sq.add(new Squar(0, 1));
+			tV.add(sq);
+		}
+		this.v = tV;
+	}
+	
+	public void left() {
+		this.tt = this.tt.sub(new Squar(0, 1));
+		Vector<Squar> tV = new Vector<>();
+		for (int i = 0; i < this.v.size(); i++) {
+			Squar sq = this.v.elementAt(i);
+			sq = sq.sub(new Squar(0, 1));
+			tV.add(sq);
+		}
+		this.v = tV;
 	}
 
+	public boolean check(boolean b[][]) {
+		for (int i = 0; i < this.v.size(); i++) {
+			Squar sq = this.v.elementAt(i);
+			if (b[sq.getX()][sq.getY()] == false) {
+				System.out.println("Day");
+				sq.display();
+				return false;
+			}
+				
+		}
+		return true;
+	}
+	
+	public void display() {
+		for (int i = 0; i < this.v.size(); i++) {
+			Squar sq = this.v.elementAt(i);
+			System.out.print("(" + (sq.getX() - tt.getX()) + ", " + (sq.getY() - tt.getY()) + ") ");
+		}
+		System.out.println("(" + tt.getX() + ", " + tt.getY() + ") ");
+	}
+	
 	public Puzzle(Squar TT) {
 		this.tt = TT;
 	}
@@ -103,10 +189,8 @@ public class Puzzle {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
 		Puzzle p = new Puzzle();
-		p.turnV();
-
+		p.turnLeft();
 	}
 
 }
