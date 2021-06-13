@@ -17,7 +17,7 @@ import java.awt.event.*;
 import java.io.*;
 import javax.swing.*;
 
-import Class.Puzzle;
+import Class.Cubes;
 import Class.Squar;
 
 import java.net.*;
@@ -39,8 +39,8 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 	boolean b[][] = new boolean[M + 5][N + 7];
 	int preCl = 0;
 	Color cl[] = {Color.black, Color.blue, Color.cyan, Color.green, Color.magenta, Color.orange, Color.red, Color.yellow};
-	Puzzle p = new Puzzle();
-	Puzzle [] Que = new Puzzle[4];
+	Cubes p = new Cubes();
+	Cubes [] Que = new Cubes[4];
 	public ClassicJigsawPuzzle() {
 		super("HaiZuka");
 		cn = init();
@@ -68,7 +68,7 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 		pn.setLayout(new GridLayout(M, N + 4));
 		
 		for (int i = 0; i < Que.length; i++) {
-			Que[i] = new Puzzle();
+			Que[i] = new Cubes();
 			Que[i].setIc(Que[i].initIc(preCl));
 			preCl = Que[i].getIc();
 		}
@@ -157,7 +157,7 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 		}
 		for (int i = 0; i < Que.length - 1; i++)
 			Que[i] = Que[i + 1];
-		Que[Que.length - 1] = new Puzzle();
+		Que[Que.length - 1] = new Cubes();
 		Que[Que.length - 1].setIc(Que[Que.length - 1].initIc(preCl));
 		preCl = Que[Que.length - 1].getIc();
 		int H = 2;

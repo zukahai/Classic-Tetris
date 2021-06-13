@@ -3,7 +3,7 @@ package Class;
 import java.awt.Color;
 import java.util.Vector;
 
-public class Puzzle {
+public class Cubes {
 	int d[] = {0, 0, 2, 1, 1, 1, 1, 1};
 	int c[] = {0, 1, 1, 1, 1, 0, 1, 1};
 	int type = 0;
@@ -12,7 +12,7 @@ public class Puzzle {
 	Squar tt = new Squar();
 	Vector<Squar> v = new Vector();
 
-	public Puzzle() {
+	public Cubes() {
 		this.tt = new Squar(2, 8);
 		this.type = (int) (1000000 * Math.random() % 7 + 1);
 		this.ic = (int) (1000000 * Math.random() % 7 + 1);
@@ -174,7 +174,7 @@ public class Puzzle {
 		System.out.println("(" + tt.getX() + ", " + tt.getY() + ") ");
 	}
 	
-	public Puzzle(Squar TT) {
+	public Cubes(Squar TT) {
 		this.tt = TT;
 	}
 
@@ -228,7 +228,7 @@ public class Puzzle {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Puzzle p = new Puzzle();
+		Cubes p = new Cubes();
 		p.turnLeft();
 	}
 
