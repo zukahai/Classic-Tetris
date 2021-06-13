@@ -33,6 +33,7 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 	int delay = 100;
 	int index = delay;
 	int score = 0;
+	int count = 0;
 	boolean die = false;
 	JButton bt[][] = new JButton[M + 5][N + 7];
 	boolean b[][] = new boolean[M + 5][N + 7];
@@ -54,7 +55,7 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 					index = delay;
 				} else 
 					index --;
-				System.out.println(index);
+				System.out.println(delay);
 			}
 		});
 	}
@@ -108,15 +109,39 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 		return cn;
 	}
 	
+	public int sub(int N) {
+		if (N < 24)
+			return 3;
+		if (N < 50)
+			return 0;
+		if (N < 60)
+			return 1;
+		if (N < 100)
+			return 0;
+		if (N < 105)
+			return 1;
+		if (N < 200)
+			return 0;
+		if (N < 205)
+			return 1;
+		return 0;
+	}
+	
+	public void updateScore() {
+		int temp = score;
+		for (int j = N + 6; j >= N + 3; j--) {
+			int k = temp % 10;
+			temp /= 10;
+			bt[M + 1][j].setIcon(getIcon("" + k));
+		}
+	}
+	
 	public void updateQue() {
-		delay -= 1;
-		if (delay > 50)
-			delay -= 1;
-		if (delay > 20)
-			delay -= 1;
+		delay -= sub(count);
 		if (delay < 10)
 			delay = 10;
-		for (int i = 0; i <= M; i++)
+		count++;
+		for (int i = 0; i <= M + 2; i++)
 			for (int j = N + 3; j <= N + 6; j++) {
 				bt[i][j].setBackground(Color.black);
 				bt[i][j].setBorder(null);
@@ -147,6 +172,7 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 			}
 			H += Que[i].getBot() + Que[i].getTop() + 3;
 		}
+		updateScore();
 	}
 	
 	public void update() {
@@ -160,6 +186,8 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 				if (b[i][j] == true)
 					kt = false;
 			if (kt) {
+				score++;
+				updateScore();
 				for (int h = i; h >= 1; h--)
 					for (int j = 3; j < N + 3; j++) {
 						b[h][j] = b[h - 1][j];
@@ -181,6 +209,14 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 			bt[sq.getX()][sq.getY()].setBackground(cl[p.getIc()]);
 		}
 		preCl = p.getIc();
+	}
+	
+	public Icon getIcon(String index) {
+		int w = 35;
+		int h = 35;
+		Image image = new ImageIcon(getClass().getResource("/Icons/" + index + ".png")).getImage();
+		Icon ic = new ImageIcon(image.getScaledInstance(w, h, image.SCALE_SMOOTH));
+		return ic;
 	}
 	
 	public static void main(String[] args) {
