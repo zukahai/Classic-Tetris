@@ -209,7 +209,6 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 			Squar sq = vP.elementAt(i);
 			bt[sq.getX()][sq.getY()].setBackground(cl[p.getIc()]);
 		}
-		preCl = p.getIc();
 	}
 	
 	public Icon getIcon(String index) {
