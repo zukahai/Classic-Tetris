@@ -55,9 +55,10 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 					index = delay;
 				} else 
 					index --;
-				System.out.println(delay);
+//				System.out.println(delay);
 			}
 		});
+		timer.start();
 	}
 	
 	public Container init() {
@@ -220,7 +221,7 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 	}
 	
 	public static void main(String[] args) {
-		new ClassicJigsawPuzzle().timer.start();
+		new ClassicJigsawPuzzle();
 	}
 
 	@Override
