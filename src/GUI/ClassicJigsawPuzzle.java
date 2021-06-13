@@ -28,67 +28,132 @@ import java.io.*;
 public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 	Container cn;
 	JPanel pn;
-	Timer timer;
+	Timer timer = new Timer(100, null);
 	int M = 22, N = 11;
+	int delay = 100;
+	int index = delay;
+	int score = 0;
 	boolean die = false;
-	JButton bt[][] = new JButton[M + 5][N + 5];
-	boolean b[][] = new boolean[M + 5][N + 5];
+	JButton bt[][] = new JButton[M + 5][N + 7];
+	boolean b[][] = new boolean[M + 5][N + 7];
 	int preCl = 0;
 	Color cl[] = {Color.black, Color.blue, Color.cyan, Color.green, Color.magenta, Color.orange, Color.yellow};
 	Puzzle p = new Puzzle();
+	Puzzle [] Que = new Puzzle[4];
 	public ClassicJigsawPuzzle() {
 		super("HaiZuka");
 		cn = init();
-		timer = new Timer(300, new ActionListener() {
+		timer = new Timer(1, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				p.down();
-//				p.display();
-				if (!p.check(b))
-					newPuzz();
-				update();
+				if (index == 0) {
+					p.down();
+//					p.display();
+					if (!p.check(b))
+						newPuzz();
+					update();
+					index = delay;
+				} else 
+					index --;
+				System.out.println(index);
 			}
 		});
-		timer.start();
 	}
 	
 	public Container init() {
 		Container cn = this.getContentPane();
 		
 		pn = new JPanel();
-		pn.setLayout(new GridLayout(M, N));
+		pn.setLayout(new GridLayout(M, N + 4));
+		
+		for (int i = 0; i < Que.length; i++) {
+			Que[i] = new Puzzle();
+			Que[i].setIc(Que[i].initIc(preCl));
+			preCl = Que[i].getIc();
+		}
 		
 		for (int i = 0; i < M + 5; i++)
 			for (int j = 0; j < N + 5; j++) {
 				b[i][j]  = false;
 			}
 		
-		for (int i = 0; i <= M + 4; i++)
-			for (int j = 0; j <= N + 4; j++) {
+		for (int i = 0; i <= M + 3; i++)
+			for (int j = 0; j <= N + 6; j++) {
 				bt[i][j] = new JButton();
 				bt[i][j].addKeyListener(this);
 				bt[i][j].setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.gray));
 			}
-		for (int i = 0; i < 3; i++)
-			for (int j = 3; j < N + 3; j++)
-				b[i][j] = true;
-		for (int i = 3; i < M + 3; i++)
+		for (int i = 0; i <= M + 3; i++)
+			for (int j = N + 3; j <= N + 6; j++) {
+				bt[i][j].setBorder(null);
+			}
+		
+		for (int i = 0; i < M + 3; i++)
 			for (int j = 3; j < N + 3; j++) {
 				b[i][j] = true;
+			}
+		
+		for (int i = 3; i < M + 3; i++)
+			for (int j = 3; j < N + 7; j++) {
 				bt[i][j].setBackground(cl[0]);
 				pn.add(bt[i][j]);
 			}
 		cn.add(pn);
+		updateQue();
 		this.setVisible(true);
-		this.setSize(386, 700);
+		this.setSize(500, 700);
 		this.setLocationRelativeTo(null);
-
 		setResizable(false);
-//		this.setResizable(false);
+		
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		return cn;
 	}
 	
+	public void updateQue() {
+		delay -= 1;
+		if (delay > 50)
+			delay -= 1;
+		if (delay > 20)
+			delay -= 1;
+		if (delay < 10)
+			delay = 10;
+		for (int i = 0; i <= M; i++)
+			for (int j = N + 3; j <= N + 6; j++) {
+				bt[i][j].setBackground(Color.black);
+				bt[i][j].setBorder(null);
+			}
+				
+		p = Que[0];
+		p.setTt(new Squar(2, 8));
+		p.setV(p.ininV());
+		if (!p.check(b)) {
+			timer.stop();
+			die = true;
+		}
+		for (int i = 0; i < Que.length - 1; i++)
+			Que[i] = Que[i + 1];
+		Que[Que.length - 1] = new Puzzle();
+		Que[Que.length - 1].setIc(Que[Que.length - 1].initIc(preCl));
+		preCl = Que[Que.length - 1].getIc();
+		int H = 2;
+		for (int i = 0; i < Que.length; i++) {
+			Que[i].setTt(new Squar(H + Que[i].getTop() + 1, N + 4));
+			if (Que[i].getType() == 4 || Que[i].getType() == 5 || Que[i].getType() == 7)
+				Que[i].setTt(new Squar(H + Que[i].getTop() + 1, N + 5));
+			Que[i].setV(Que[i].ininV());
+			for (int J = 0; J < Que[i].getV().size(); J++) {
+				Squar sq = Que[i].getV().elementAt(J);
+				bt[sq.getX()][sq.getY()].setBackground(cl[Que[i].getIc()]);
+				bt[sq.getX()][sq.getY()].setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.gray));
+			}
+			H += Que[i].getBot() + Que[i].getTop() + 3;
+		}
+	}
 	
 	public void update() {
+		if (die){
+			JOptionPane.showMessageDialog(null, "Your Score: " + score);
+			System.exit(0);
+		}
 		for (int i = M + 2; i >= 1; i--) {
 			boolean kt = true;
 			for (int j = 3; j < N + 3; j++)
@@ -119,7 +184,7 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 	}
 	
 	public static void main(String[] args) {
-		new ClassicJigsawPuzzle();
+		new ClassicJigsawPuzzle().timer.start();
 	}
 
 	@Override
@@ -135,20 +200,13 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 			Squar sq = pp.elementAt(i);
 			b[sq.getX()][sq.getY()] = false;
 		}
-		p = new Puzzle();
-		p.setIc(p.initIc(preCl));
-		preCl = p.getIc();
-		if (!p.check(b)) {
-			p.display();
-			timer.stop();
-			die = true;
-		}
+		updateQue();
 	}
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		if (die)
+		if (die) 
 			return;
 		if (e.getKeyCode() == e.VK_UP) {
 			p.turnRight();

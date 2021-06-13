@@ -4,7 +4,10 @@ import java.awt.Color;
 import java.util.Vector;
 
 public class Puzzle {
+	int d[] = {0, 0, 2, 1, 1, 1, 1, 1};
+	int c[] = {0, 1, 1, 1, 1, 0, 1, 1};
 	int type = 0;
+	int top, bot;
 	int ic = 0;
 	Squar tt = new Squar();
 	Vector<Squar> v = new Vector();
@@ -15,6 +18,8 @@ public class Puzzle {
 		this.ic = (int) (1000000 * Math.random() % 6 + 1);
 //		this.type = 2;
 		this.v = ininV();
+		this.bot = c[type];
+		this.top = d[type];
 	}
 
 	public int getIc() {
@@ -46,7 +51,7 @@ public class Puzzle {
 			vii.add(new Squar(tt.getX(), tt.getY()));
 			vii.add(new Squar(tt.getX() - 1, tt.getY()));
 			vii.add(new Squar(tt.getX() + 1, tt.getY()));
-			vii.add(new Squar(tt.getX() - 1, tt.getY() + 1));
+			vii.add(new Squar(tt.getX() + 1, tt.getY() - 1));
 		} else if (this.type == 5) {
 			vii.add(new Squar(tt.getX(), tt.getY()));
 			vii.add(new Squar(tt.getX() - 1, tt.getY()));
@@ -195,6 +200,22 @@ public class Puzzle {
 
 	public void setV(Vector<Squar> v) {
 		this.v = v;
+	}
+	
+	public int getTop() {
+		return top;
+	}
+
+	public void setTop(int top) {
+		this.top = top;
+	}
+
+	public int getBot() {
+		return bot;
+	}
+
+	public void setBot(int bot) {
+		this.bot = bot;
 	}
 
 	public int initIc(int N) {
