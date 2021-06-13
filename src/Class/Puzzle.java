@@ -15,7 +15,7 @@ public class Puzzle {
 	public Puzzle() {
 		this.tt = new Squar(2, 8);
 		this.type = (int) (1000000 * Math.random() % 7 + 1);
-		this.ic = (int) (1000000 * Math.random() % 6 + 1);
+		this.ic = (int) (1000000 * Math.random() % 7 + 1);
 //		this.type = 2;
 		this.v = ininV();
 		this.bot = c[type];

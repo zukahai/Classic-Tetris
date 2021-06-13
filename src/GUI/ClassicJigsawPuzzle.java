@@ -38,7 +38,7 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 	JButton bt[][] = new JButton[M + 5][N + 7];
 	boolean b[][] = new boolean[M + 5][N + 7];
 	int preCl = 0;
-	Color cl[] = {Color.black, Color.blue, Color.cyan, Color.green, Color.magenta, Color.orange, Color.yellow};
+	Color cl[] = {Color.black, Color.blue, Color.cyan, Color.green, Color.magenta, Color.orange, Color.red, Color.yellow};
 	Puzzle p = new Puzzle();
 	Puzzle [] Que = new Puzzle[4];
 	public ClassicJigsawPuzzle() {
