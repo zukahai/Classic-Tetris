@@ -247,28 +247,24 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 		if (e.getKeyCode() == e.VK_UP) {
 			p.turnRight();
 			if (!p.check(b)) {
-//				System.out.println("Oh no 1");
 				p.turnLeft();
 			}
 			update();
 		} else if (e.getKeyCode() == e.VK_DOWN) {
 			p.down();
 			if (!p.check(b)) {
-//				System.out.println("Oh no 2");
 				newPuzz();
 			}
 			update();
 		} else if (e.getKeyCode() == e.VK_LEFT) {
 			p.left();
 			if (!p.check(b)) {
-//				System.out.println("Oh no 3");
 				p.right();
 			}
 			update();
 		} else if (e.getKeyCode() == e.VK_RIGHT) {
 			p.right();
 			if (!p.check(b)) {
-//				System.out.println("Oh no 4");
 				p.left();
 			}
 			update();
