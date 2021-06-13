@@ -1,7 +1,7 @@
 ## <p align="center"> Làm Game Xếp Hình Bằng Java </p>
 <p align="center"> <img src="https://github.com/zukahai/HaiZuka/blob/master/Images/ClassicJigsawPuzzle/Bg.png" alt="Tieude" /> </p>
 
-##Làm Game Xếp Hình Bằng Java
+## Làm Game Xếp Hình Bằng Java
 
 ### Giới thiệu trò chơi xếp hình
 
@@ -219,7 +219,7 @@ Xóa bỏ 1 hàng ngang nếu nó đều là các ô vuông trong các khối h�
 
 ### Kết
 
-Trên đây là chia sẻ của mình về cách mình đã lập trình game xếp hình, mọi đóng góp xin được ghi nhận ở phần bình luận, các bạn có thể tham khảo source code của mình Tại đây.
+Trên đây là chia sẻ của mình về cách mình đã lập trình game xếp hình, mọi đóng góp xin được ghi nhận ở phần bình luận, các bạn có thể tham khảo source code của mình [Tại đây](https://github.com/zukahai/Classic-Jigsaw-Puzzle).
 
 Video Demo:
 
