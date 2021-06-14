@@ -181,13 +181,14 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 			JOptionPane.showMessageDialog(null, "Your Score: " + score);
 			System.exit(0);
 		}
+		int countR = 0;
 		for (int i = M + 2; i >= 1; i--) {
 			boolean kt = true;
 			for (int j = 3; j < N + 3; j++)
 				if (b[i][j] == true)
 					kt = false;
 			if (kt) {
-				score++;
+				countR++;
 				updateScore();
 				for (int h = i; h >= 1; h--)
 					for (int j = 3; j < N + 3; j++) {
@@ -196,8 +197,12 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 					}
 				for (int j = 3; j < N + 3; j++)
 					b[0][j] = true;
+				i++;
 			}
 		}
+		
+		score += countR * (countR + 1) / 2;
+		updateScore();
 		
 		for (int i = 3; i < M + 3; i++)
 			for (int j = 3; j < N + 3; j++)
