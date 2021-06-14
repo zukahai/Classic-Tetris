@@ -201,7 +201,22 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 			}
 		}
 		
-		score += countR * (countR + 1) / 2;
+		//Score: 760  2700  5700  22800
+		
+		switch (countR) {
+			case 1:
+				score += 1;
+				break;
+			case 2:
+				score += 4;
+				break;
+			case 3:
+				score += 9;
+				break;
+			case 4:
+				score += 30;
+				break;
+		}
 		updateScore();
 		
 		for (int i = 3; i < M + 3; i++)
