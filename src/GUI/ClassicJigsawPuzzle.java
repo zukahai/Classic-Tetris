@@ -29,7 +29,7 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 	Container cn;
 	JPanel pn;
 	Timer timer = new Timer(100, null);
-	int M = 22, N = 11;
+	int M = 22, N = 10;
 	int delay = 100;
 	int index = delay;
 	int score = 0;
@@ -102,7 +102,7 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 		cn.add(pn);
 		updateQue();
 		this.setVisible(true);
-		this.setSize(500, 700);
+		this.setSize(470, 700);
 		this.setLocationRelativeTo(null);
 		setResizable(false);
 		

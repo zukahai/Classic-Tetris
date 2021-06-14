@@ -76,14 +76,9 @@ public class Cubes {
 			Vector<Squar> tV = new Vector<>();
 			for (int i = 0; i < this.v.size(); i++) {
 				Squar sq = this.v.elementAt(i);
-//				sq.display();
 				sq = sq.sub(tt);
-//				sq.display();
 				sq = sq.turnR();
-//				sq.display();
 				sq = sq.add(tt);
-//				sq.display();
-//				System.out.println("-----------");
 				tV.add(sq);
 			}
 			this.v = tV;
@@ -95,14 +90,9 @@ public class Cubes {
 			Vector<Squar> tV = new Vector<>();
 			for (int i = 0; i < this.v.size(); i++) {
 				Squar sq = this.v.elementAt(i);
-//				sq.display();
 				sq = sq.sub(tt);
-//				sq.display();
 				sq = sq.turnL();
-//				sq.display();
 				sq = sq.add(tt);
-//				sq.display();
-//				System.out.println("-----------");
 				tV.add(sq);
 			}
 			this.v = tV;
@@ -157,8 +147,6 @@ public class Cubes {
 		for (int i = 0; i < this.v.size(); i++) {
 			Squar sq = this.v.elementAt(i);
 			if (b[sq.getX()][sq.getY()] == false) {
-//				System.out.println("Day");
-//				sq.display();
 				return false;
 			}
 				
