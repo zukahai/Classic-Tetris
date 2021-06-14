@@ -37,17 +37,7 @@ public class Cubes {
 
 	public Vector<Squar> ininV() {
 		Vector<Squar> vii = new Vector();
-		if (this.type == 6) {
-			vii.add(new Squar(tt.getX(), tt.getY()));
-			vii.add(new Squar(tt.getX(), tt.getY() + 1));
-			vii.add(new Squar(tt.getX() + 1, tt.getY()));
-			vii.add(new Squar(tt.getX() + 1, tt.getY() + 1));
-		} else if (this.type == 7) {
-			vii.add(new Squar(tt.getX(), tt.getY()));
-			vii.add(new Squar(tt.getX() - 1, tt.getY()));
-			vii.add(new Squar(tt.getX() - 2, tt.getY()));
-			vii.add(new Squar(tt.getX() + 1, tt.getY()));
-		} else if (this.type == 1) {
+		if (this.type == 1) {
 			vii.add(new Squar(tt.getX(), tt.getY()));
 			vii.add(new Squar(tt.getX() - 1, tt.getY()));
 			vii.add(new Squar(tt.getX() + 1, tt.getY()));
@@ -57,11 +47,6 @@ public class Cubes {
 			vii.add(new Squar(tt.getX() - 1, tt.getY()));
 			vii.add(new Squar(tt.getX() + 1, tt.getY()));
 			vii.add(new Squar(tt.getX() + 1, tt.getY() - 1));
-		} else if (this.type == 5) {
-			vii.add(new Squar(tt.getX(), tt.getY()));
-			vii.add(new Squar(tt.getX() - 1, tt.getY()));
-			vii.add(new Squar(tt.getX() + 1, tt.getY()));
-			vii.add(new Squar(tt.getX(), tt.getY() - 1));
 		} else if (this.type == 3) {
 			vii.add(new Squar(tt.getX(), tt.getY()));
 			vii.add(new Squar(tt.getX() + 1, tt.getY()));
@@ -72,12 +57,27 @@ public class Cubes {
 			vii.add(new Squar(tt.getX() + 1, tt.getY()));
 			vii.add(new Squar(tt.getX(), tt.getY() - 1));
 			vii.add(new Squar(tt.getX() - 1, tt.getY() - 1));
-		}
+		} else if (this.type == 5) {
+			vii.add(new Squar(tt.getX(), tt.getY()));
+			vii.add(new Squar(tt.getX() - 1, tt.getY()));
+			vii.add(new Squar(tt.getX() + 1, tt.getY()));
+			vii.add(new Squar(tt.getX(), tt.getY() - 1));
+		} else if (this.type == 6) {
+			vii.add(new Squar(tt.getX(), tt.getY()));
+			vii.add(new Squar(tt.getX(), tt.getY() + 1));
+			vii.add(new Squar(tt.getX() + 1, tt.getY()));
+			vii.add(new Squar(tt.getX() + 1, tt.getY() + 1));
+		} else if (this.type == 7) {
+			vii.add(new Squar(tt.getX(), tt.getY()));
+			vii.add(new Squar(tt.getX() - 1, tt.getY()));
+			vii.add(new Squar(tt.getX() - 2, tt.getY()));
+			vii.add(new Squar(tt.getX() + 1, tt.getY()));
+		}   
 		return vii;
 	}
 
 	public void turnRight() {
-		if (type != 1) {
+		if (type != 6) {
 			Vector<Squar> tV = new Vector<>();
 			for (int i = 0; i < this.v.size(); i++) {
 				Squar sq = this.v.elementAt(i);
@@ -91,7 +91,7 @@ public class Cubes {
 	}
 	
 	public void turnLeft() {
-		if (type != 1) {
+		if (type != 6) {
 			Vector<Squar> tV = new Vector<>();
 			for (int i = 0; i < this.v.size(); i++) {
 				Squar sq = this.v.elementAt(i);

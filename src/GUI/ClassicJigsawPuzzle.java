@@ -106,7 +106,7 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 		this.setLocationRelativeTo(null);
 		setResizable(false);
 		
-//		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		return cn;
 	}
 	
