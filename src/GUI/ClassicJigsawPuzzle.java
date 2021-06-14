@@ -33,14 +33,14 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 	int delay = 50;
 	int index = delay;
 	int score = 0;
-	int count = 0;
+	int line = 0;
 	boolean die = false;
-	JButton bt[][] = new JButton[M + 5][N + 7];
-	boolean b[][] = new boolean[M + 5][N + 7];
+	JButton bt[][] = new JButton[M + 5][N + 9];
+	boolean b[][] = new boolean[M + 5][N + 9];
 	int preCl = 0;
 	Color cl[] = {Color.black, Color.blue, Color.cyan, Color.green, Color.magenta, Color.orange, Color.red, Color.yellow};
 	Cubes p = new Cubes();
-	Cubes [] Que = new Cubes[4];
+	Cubes [] Que = new Cubes[5];
 	public ClassicJigsawPuzzle() {
 		super("HaiZuka");
 		cn = init();
@@ -65,7 +65,7 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 		Container cn = this.getContentPane();
 		
 		pn = new JPanel();
-		pn.setLayout(new GridLayout(M, N + 4));
+		pn.setLayout(new GridLayout(M, N + 6));
 		
 		for (int i = 0; i < Que.length; i++) {
 			Que[i] = new Cubes();
@@ -74,18 +74,18 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 		}
 		
 		for (int i = 0; i < M + 5; i++)
-			for (int j = 0; j < N + 5; j++) {
+			for (int j = 0; j < N + 7; j++) {
 				b[i][j]  = false;
 			}
 		
 		for (int i = 0; i <= M + 3; i++)
-			for (int j = 0; j <= N + 6; j++) {
+			for (int j = 0; j <= N + 8; j++) {
 				bt[i][j] = new JButton();
 				bt[i][j].addKeyListener(this);
 				bt[i][j].setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.gray));
 			}
 		for (int i = 0; i <= M + 3; i++)
-			for (int j = N + 3; j <= N + 6; j++) {
+			for (int j = N + 3; j <= N + 8; j++) {
 				bt[i][j].setBorder(null);
 			}
 		
@@ -95,14 +95,14 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 			}
 		
 		for (int i = 3; i < M + 3; i++)
-			for (int j = 3; j < N + 7; j++) {
+			for (int j = 3; j < N + 9; j++) {
 				bt[i][j].setBackground(cl[0]);
 				pn.add(bt[i][j]);
 			}
 		cn.add(pn);
 		updateQue();
 		this.setVisible(true);
-		this.setSize(470, 700);
+		this.setSize(500, 700);
 		this.setLocationRelativeTo(null);
 		setResizable(false);
 		
@@ -121,19 +121,30 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 	
 	public void updateScore() {
 		int temp = score;
-		for (int j = N + 6; j >= N + 3; j--) {
+		for (int j = N + 7; j >= N + 4; j--) {
 			int k = temp % 10;
 			temp /= 10;
 			bt[M + 1][j].setIcon(getIcon("" + k));
 		}
+		
+		temp = line;
+		for (int j = N + 7; j >= N + 4; j--) {
+			int k = temp % 10;
+			temp /= 10;
+			bt[M - 1][j].setIcon(getIcon("" + k));
+		}
+		
+		temp = 51 - delay;
+		for (int j = N + 7; j >= N + 4; j--) {
+			int k = temp % 10;
+			temp /= 10;
+			bt[M - 3][j].setIcon(getIcon("" + k));
+		}
 	}
 	
 	public void updateQue() {
-		delay -= sub(count);
-		if (delay < 5)
-			delay = 5;
 		for (int i = 0; i <= M + 2; i++)
-			for (int j = N + 3; j <= N + 6; j++) {
+			for (int j = N + 3; j <= N + 8; j++) {
 				bt[i][j].setBackground(Color.black);
 				bt[i][j].setBorder(null);
 			}
@@ -150,18 +161,18 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 		Que[Que.length - 1] = new Cubes();
 		Que[Que.length - 1].setIc(Que[Que.length - 1].initIc(preCl));
 		preCl = Que[Que.length - 1].getIc();
-		int H = 2;
+		int H = 3;
 		for (int i = 0; i < Que.length; i++) {
-			Que[i].setTt(new Squar(H + Que[i].getTop() + 1, N + 4));
-			if (Que[i].getType() == 2 || Que[i].getType() == 4 || Que[i].getType() == 5)
-				Que[i].setTt(new Squar(H + Que[i].getTop() + 1, N + 5));
+			Que[i].setTt(new Squar(H + Que[i].getTop() + 1, N + 5));
+//			if (Que[i].getType() == 2 || Que[i].getType() == 4 || Que[i].getType() == 5)
+//				Que[i].setTt(new Squar(H + Que[i].getTop() + 1, N + 5));
 			Que[i].setV(Que[i].ininV());
 			for (int J = 0; J < Que[i].getV().size(); J++) {
 				Squar sq = Que[i].getV().elementAt(J);
 				bt[sq.getX()][sq.getY()].setBackground(cl[Que[i].getIc()]);
 				bt[sq.getX()][sq.getY()].setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.gray));
 			}
-			H += Que[i].getBot() + Que[i].getTop() + 3;
+			H += Que[i].getBot() + Que[i].getTop() + 2;
 		}
 		updateScore();
 	}
@@ -179,7 +190,10 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 					kt = false;
 			if (kt) {
 				countR++;
-				count++;
+				line++;
+				delay -= sub(line);
+				if (delay < 5)
+					delay = 5;
 				updateScore();
 				for (int h = i; h >= 1; h--)
 					for (int j = 3; j < N + 3; j++) {

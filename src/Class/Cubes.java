@@ -3,9 +3,11 @@ package Class;
 import java.awt.Color;
 import java.util.Vector;
 
+import GUI.ClassicJigsawPuzzle;
+
 public class Cubes {
-	int d[] = {0, 1, 1, 1, 1, 1, 0, 2};
-	int c[] = {0, 1, 1, 1, 1, 1, 1, 1};
+	int d[] = {0, 0, 0, 0, 0, 0, 0, 0};
+	int c[] = {0, 1, 1, 1, 1, 1, 1, 0};
 	int type = 0;
 	int top, bot;
 	int ic = 0;
@@ -14,12 +16,14 @@ public class Cubes {
 
 	public Cubes() {
 		this.tt = new Squar(2, 8);
-		int rand = (int) (1000000 * Math.random() % 5 + 1);
+		int rand = (int) (1000000 * Math.random() % 6 + 1);
 		if (rand < 3) {
 			if (Math.random() > 0.5)
 				rand++;
 		} else 
 			rand += 2;
+		if (rand == 8)
+			rand = 7;
 		this.type = rand;
 		this.ic = (int) (1000000 * Math.random() % 7 + 1);
 		this.v = ininV();
@@ -39,28 +43,28 @@ public class Cubes {
 		Vector<Squar> vii = new Vector();
 		if (this.type == 1) {
 			vii.add(new Squar(tt.getX(), tt.getY()));
-			vii.add(new Squar(tt.getX() - 1, tt.getY()));
-			vii.add(new Squar(tt.getX() + 1, tt.getY()));
-			vii.add(new Squar(tt.getX() + 1, tt.getY() + 1));
+			vii.add(new Squar(tt.getX(), tt.getY() + 1));
+			vii.add(new Squar(tt.getX(), tt.getY() - 1));
+			vii.add(new Squar(tt.getX() + 1, tt.getY() - 1));
 		} else if (this.type == 2) {
 			vii.add(new Squar(tt.getX(), tt.getY()));
-			vii.add(new Squar(tt.getX() - 1, tt.getY()));
+			vii.add(new Squar(tt.getX(), tt.getY() + 1));
+			vii.add(new Squar(tt.getX(), tt.getY() - 1));
+			vii.add(new Squar(tt.getX() + 1, tt.getY() + 1));
+		} else if (this.type == 3) {
+			vii.add(new Squar(tt.getX(), tt.getY()));
+			vii.add(new Squar(tt.getX(), tt.getY() - 1));
+			vii.add(new Squar(tt.getX() + 1, tt.getY()));
+			vii.add(new Squar(tt.getX() + 1, tt.getY() + 1));
+		} else if (this.type == 4) {
+			vii.add(new Squar(tt.getX(), tt.getY()));
+			vii.add(new Squar(tt.getX(), tt.getY() + 1));
 			vii.add(new Squar(tt.getX() + 1, tt.getY()));
 			vii.add(new Squar(tt.getX() + 1, tt.getY() - 1));
-		} else if (this.type == 3) {
+		} else if (this.type == 5) {
 			vii.add(new Squar(tt.getX(), tt.getY()));
 			vii.add(new Squar(tt.getX() + 1, tt.getY()));
 			vii.add(new Squar(tt.getX(), tt.getY() + 1));
-			vii.add(new Squar(tt.getX() - 1, tt.getY() + 1));
-		} else if (this.type == 4) {
-			vii.add(new Squar(tt.getX(), tt.getY()));
-			vii.add(new Squar(tt.getX() + 1, tt.getY()));
-			vii.add(new Squar(tt.getX(), tt.getY() - 1));
-			vii.add(new Squar(tt.getX() - 1, tt.getY() - 1));
-		} else if (this.type == 5) {
-			vii.add(new Squar(tt.getX(), tt.getY()));
-			vii.add(new Squar(tt.getX() - 1, tt.getY()));
-			vii.add(new Squar(tt.getX() + 1, tt.getY()));
 			vii.add(new Squar(tt.getX(), tt.getY() - 1));
 		} else if (this.type == 6) {
 			vii.add(new Squar(tt.getX(), tt.getY()));
@@ -69,9 +73,9 @@ public class Cubes {
 			vii.add(new Squar(tt.getX() + 1, tt.getY() + 1));
 		} else if (this.type == 7) {
 			vii.add(new Squar(tt.getX(), tt.getY()));
-			vii.add(new Squar(tt.getX() - 1, tt.getY()));
-			vii.add(new Squar(tt.getX() - 2, tt.getY()));
-			vii.add(new Squar(tt.getX() + 1, tt.getY()));
+			vii.add(new Squar(tt.getX(), tt.getY() - 1));
+			vii.add(new Squar(tt.getX(), tt.getY() + 1));
+			vii.add(new Squar(tt.getX(), tt.getY() + 2));
 		}   
 		return vii;
 	}
@@ -221,8 +225,7 @@ public class Cubes {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Cubes p = new Cubes();
-		p.turnLeft();
+		new ClassicJigsawPuzzle();
 	}
 
 }
