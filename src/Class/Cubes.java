@@ -4,8 +4,8 @@ import java.awt.Color;
 import java.util.Vector;
 
 public class Cubes {
-	int d[] = {0, 0, 2, 1, 1, 1, 1, 1};
-	int c[] = {0, 1, 1, 1, 1, 0, 1, 1};
+	int d[] = {0, 1, 1, 1, 1, 1, 0, 2};
+	int c[] = {0, 1, 1, 1, 1, 1, 1, 1};
 	int type = 0;
 	int top, bot;
 	int ic = 0;
@@ -14,9 +14,14 @@ public class Cubes {
 
 	public Cubes() {
 		this.tt = new Squar(2, 8);
-		this.type = (int) (1000000 * Math.random() % 7 + 1);
+		int rand = (int) (1000000 * Math.random() % 5 + 1);
+		if (rand < 3) {
+			if (Math.random() > 0.5)
+				rand++;
+		} else 
+			rand += 2;
+		this.type = rand;
 		this.ic = (int) (1000000 * Math.random() % 7 + 1);
-//		this.type = 2;
 		this.v = ininV();
 		this.bot = c[type];
 		this.top = d[type];
@@ -32,22 +37,22 @@ public class Cubes {
 
 	public Vector<Squar> ininV() {
 		Vector<Squar> vii = new Vector();
-		if (this.type == 1) {
+		if (this.type == 6) {
 			vii.add(new Squar(tt.getX(), tt.getY()));
 			vii.add(new Squar(tt.getX(), tt.getY() + 1));
 			vii.add(new Squar(tt.getX() + 1, tt.getY()));
 			vii.add(new Squar(tt.getX() + 1, tt.getY() + 1));
-		} else if (this.type == 2) {
+		} else if (this.type == 7) {
 			vii.add(new Squar(tt.getX(), tt.getY()));
 			vii.add(new Squar(tt.getX() - 1, tt.getY()));
 			vii.add(new Squar(tt.getX() - 2, tt.getY()));
 			vii.add(new Squar(tt.getX() + 1, tt.getY()));
-		} else if (this.type == 3) {
+		} else if (this.type == 1) {
 			vii.add(new Squar(tt.getX(), tt.getY()));
 			vii.add(new Squar(tt.getX() - 1, tt.getY()));
 			vii.add(new Squar(tt.getX() + 1, tt.getY()));
 			vii.add(new Squar(tt.getX() + 1, tt.getY() + 1));
-		} else if (this.type == 4) {
+		} else if (this.type == 2) {
 			vii.add(new Squar(tt.getX(), tt.getY()));
 			vii.add(new Squar(tt.getX() - 1, tt.getY()));
 			vii.add(new Squar(tt.getX() + 1, tt.getY()));
@@ -57,12 +62,12 @@ public class Cubes {
 			vii.add(new Squar(tt.getX() - 1, tt.getY()));
 			vii.add(new Squar(tt.getX() + 1, tt.getY()));
 			vii.add(new Squar(tt.getX(), tt.getY() - 1));
-		} else if (this.type == 6) {
+		} else if (this.type == 3) {
 			vii.add(new Squar(tt.getX(), tt.getY()));
 			vii.add(new Squar(tt.getX() + 1, tt.getY()));
 			vii.add(new Squar(tt.getX(), tt.getY() + 1));
 			vii.add(new Squar(tt.getX() - 1, tt.getY() + 1));
-		} else if (this.type == 7) {
+		} else if (this.type == 4) {
 			vii.add(new Squar(tt.getX(), tt.getY()));
 			vii.add(new Squar(tt.getX() + 1, tt.getY()));
 			vii.add(new Squar(tt.getX(), tt.getY() - 1));

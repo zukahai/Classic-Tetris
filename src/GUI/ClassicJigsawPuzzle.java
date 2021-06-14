@@ -106,7 +106,7 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 		this.setLocationRelativeTo(null);
 		setResizable(false);
 		
-		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+//		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		return cn;
 	}
 	
@@ -163,7 +163,7 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 		int H = 2;
 		for (int i = 0; i < Que.length; i++) {
 			Que[i].setTt(new Squar(H + Que[i].getTop() + 1, N + 4));
-			if (Que[i].getType() == 4 || Que[i].getType() == 5 || Que[i].getType() == 7)
+			if (Que[i].getType() == 2 || Que[i].getType() == 4 || Que[i].getType() == 5)
 				Que[i].setTt(new Squar(H + Que[i].getTop() + 1, N + 5));
 			Que[i].setV(Que[i].ininV());
 			for (int J = 0; J < Que[i].getV().size(); J++) {
