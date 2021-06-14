@@ -30,7 +30,7 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 	JPanel pn;
 	Timer timer = new Timer(100, null);
 	int M = 22, N = 10;
-	int delay = 100;
+	int delay = 50;
 	int index = delay;
 	int score = 0;
 	int count = 0;
@@ -111,20 +111,11 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 	}
 	
 	public int sub(int N) {
-		if (N < 24)
-			return 3;
-		if (N < 50)
-			return 0;
-		if (N < 60)
-			return 1;
-		if (N < 100)
-			return 0;
-		if (N < 105)
-			return 1;
-		if (N < 200)
-			return 0;
-		if (N < 205)
-			return 1;
+		int a[] = {15,	 20,	 30,	35,		50,		55, 	65, 	70,		100,	105, 	140,	145, 	180, 	185, 	100000};
+		int b[] = {0,	 3,		 0,		1,		0,		1,		0,		1,		0,		1, 		0,		1, 		0, 		1,		0};
+		for (int i = 0; i < a.length; i++)
+			if (N <= a[i])
+				return b[i];
 		return 0;
 	}
 	
@@ -139,9 +130,8 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 	
 	public void updateQue() {
 		delay -= sub(count);
-		if (delay < 10)
-			delay = 10;
-		count++;
+		if (delay < 5)
+			delay = 5;
 		for (int i = 0; i <= M + 2; i++)
 			for (int j = N + 3; j <= N + 6; j++) {
 				bt[i][j].setBackground(Color.black);
@@ -189,6 +179,7 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 					kt = false;
 			if (kt) {
 				countR++;
+				count++;
 				updateScore();
 				for (int h = i; h >= 1; h--)
 					for (int j = 3; j < N + 3; j++) {
