@@ -223,6 +223,6 @@ Trên đây là chia sẻ của mình về cách mình đã lập trình game x�
 
 Video Demo:
 
-[<p align="center"> <img src="https://github.com/zukahai/HaiZuka/blob/master/Images/ClassicJigsawPuzzle/4.png" alt="xephinh" /> </p>](https://codelearn.io/Media/Default/Users/HaiZuka/HaiZuka/My%20Video.mp4)
+[<p align="center"> <img src="https://github.com/zukahai/HaiZuka/blob/master/Images/ClassicJigsawPuzzle/6.png" alt="xephinh" /> </p>](https://www.youtube.com/watch?v=qKyZKUxDZh8)
 
 ## <p align="center">  :tv: Thanks for whatching :earth_africa: </p>
