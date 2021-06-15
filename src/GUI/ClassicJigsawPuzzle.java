@@ -30,7 +30,7 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 	JPanel pn;
 	Timer timer = new Timer(100, null);
 	int M = 22, N = 10;
-	int delay = 50;
+	int delay = 60;
 	int index = delay;
 	int score = 0;
 	int line = 0;
@@ -105,19 +105,44 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 		this.setSize(500, 700);
 		this.setLocationRelativeTo(null);
 		setResizable(false);
+		setTextScoreLineSpeed();
 		
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		return cn;
 	}
 	
 	public int sub(int N) {
-		int a[] = {15,	 20,	 30,	35,		50,		55, 	65, 	70,		100,	105, 	140,	145, 	180, 	185, 	100000};
-		int b[] = {0,	 3,		 0,		1,		0,		1,		0,		1,		0,		1, 		0,		1, 		0, 		1,		0};
-		for (int i = 0; i < a.length; i++)
-			if (N <= a[i])
+		int a[] = {20,	 5,	 	10,		5,		10,		5,		15,		5,		25,		5, 		20, 	5,		30,		5, 		15,		5, 		35, 	5, 		20, 	5, 		20,		5};
+		int b[] = {0,	 1,		 0,		1,		0,		1,		0,		1,		0,		1,		0,		1,		0,		1, 		0,		1, 		0, 		1,		0,		1,		0,		1};
+		int t = 0;
+		for (int i = 0; i < a.length; i++) {
+			t += a[i];
+			if (N <= t)
 				return b[i];
+		}
+			
 		return 0;
 	}
+	
+	public void setTextScoreLineSpeed() {
+		int temp = 33;
+		for (int j = N + 7; j >= N + 4; j--) {
+			bt[M][j].setIcon(getIcon("" + temp));
+			temp--;
+		}
+		temp = 22;
+		for (int j = N + 6; j >= N + 5; j--) {
+			bt[M - 2][j].setIcon(getIcon("" + temp));
+			temp--;
+		}
+		
+		temp = 13;
+		for (int j = N + 7; j >= N + 4; j--) {
+			bt[M - 4][j].setIcon(getIcon("" + temp));
+			temp--;
+		}
+	}
+	
 	
 	public void updateScore() {
 		int temp = score;
@@ -134,7 +159,7 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 			bt[M - 1][j].setIcon(getIcon("" + k));
 		}
 		
-		temp = 51 - delay;
+		temp = 61 - delay;
 		for (int j = N + 7; j >= N + 4; j--) {
 			int k = temp % 10;
 			temp /= 10;
@@ -237,8 +262,8 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 	}
 	
 	public Icon getIcon(String index) {
-		int w = 35;
-		int h = 35;
+		int w = 30;
+		int h = 30;
 		Image image = new ImageIcon(getClass().getResource("/Icons/" + index + ".png")).getImage();
 		Icon ic = new ImageIcon(image.getScaledInstance(w, h, image.SCALE_SMOOTH));
 		return ic;
