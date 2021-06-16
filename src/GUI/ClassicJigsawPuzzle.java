@@ -54,15 +54,17 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 			public void actionPerformed(ActionEvent e) {
 				if (index == 0) {
 					p.down();
-					try {
-						sound(4);
-					} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
 //					p.display();
 					if (!p.check(b))
 						newPuzz();
+					else {
+						try {
+							sound(4);
+						} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					}
 					update();
 					index = delay;
 				} else 
@@ -333,51 +335,55 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 		if (die) 
 			return;
 		if (e.getKeyCode() == e.VK_UP) {
-			try {
-				sound(1);
-			} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
 			p.turnRight();
 			if (!p.check(b)) {
 				p.turnLeft();
+			} else {
+				try {
+					sound(1);
+				} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 			update();
 		} else if (e.getKeyCode() == e.VK_DOWN) {
 			p.down();
-			try {
-				sound(4);
-			} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
 			if (!p.check(b)) {
 				newPuzz();
+			} else {
+				try {
+					sound(4);
+				} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 			update();
 		} else if (e.getKeyCode() == e.VK_LEFT) {
-			try {
-				sound(1);
-			} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
 			p.left();
 			if (!p.check(b)) {
 				p.right();
+			} else {
+				try {
+					sound(1);
+				} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 			update();
 		} else if (e.getKeyCode() == e.VK_RIGHT) {
-			try {
-				sound(1);
-			} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
 			p.right();
 			if (!p.check(b)) {
 				p.left();
+			} else {
+				try {
+					sound(1);
+				} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 			update();
 		}
