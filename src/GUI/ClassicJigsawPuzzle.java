@@ -127,7 +127,7 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 	
 	public void sound(int index) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 		try {
-			File file = new File("Sound/" + index + ".wav");
+			File file = new File("src/Sound/" + index + ".wav");
 			AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
 			Clip clip = AudioSystem.getClip();
 			clip.open(audioStream);
