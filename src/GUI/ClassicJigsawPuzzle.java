@@ -15,6 +15,12 @@ import java.awt.event.MouseListener;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 
 import Class.Cubes;
@@ -48,6 +54,12 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 			public void actionPerformed(ActionEvent e) {
 				if (index == 0) {
 					p.down();
+					try {
+						sound(4);
+					} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 //					p.display();
 					if (!p.check(b))
 						newPuzz();
@@ -111,6 +123,20 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 		return cn;
 	}
 	
+	public void sound(int index) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+		try {
+			File file = new File("Sound/" + index + ".wav");
+			AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
+			Clip clip = AudioSystem.getClip();
+			clip.open(audioStream);
+			String response = "";
+			clip.start();
+		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	}
+	
 	public int sub(int N) {
 		int a[] = {20,	 5,	 	10,		5,		10,		5,		15,		5,		25,		5, 		20, 	5,		30,		5, 		15,		5, 		35, 	5, 		20, 	5, 		20,		5};
 		int b[] = {0,	 1,		 0,		1,		0,		1,		0,		1,		0,		1,		0,		1,		0,		1, 		0,		1, 		0, 		1,		0,		1,		0,		1};
@@ -168,7 +194,7 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 	}
 	
 	public void updateQue() {
-		for (int i = 0; i <= M + 2; i++)
+		for (int i = 0; i < M - 4; i++)
 			for (int j = N + 3; j <= N + 8; j++) {
 				bt[i][j].setBackground(Color.black);
 				bt[i][j].setBorder(null);
@@ -214,6 +240,12 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 				if (b[i][j] == true)
 					kt = false;
 			if (kt) {
+				try {
+					sound(3);
+				} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				countR++;
 				line++;
 				delay -= sub(line);
@@ -280,6 +312,12 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 	}
 
 	public void newPuzz() {
+		try {
+			sound(2);
+		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		p.up();
 		Vector<Squar> pp = p.getV();
 		for (int i = 0; i < pp.size(); i++) {
@@ -295,6 +333,12 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 		if (die) 
 			return;
 		if (e.getKeyCode() == e.VK_UP) {
+			try {
+				sound(1);
+			} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			p.turnRight();
 			if (!p.check(b)) {
 				p.turnLeft();
@@ -302,17 +346,35 @@ public class ClassicJigsawPuzzle extends JFrame implements KeyListener{
 			update();
 		} else if (e.getKeyCode() == e.VK_DOWN) {
 			p.down();
+			try {
+				sound(4);
+			} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			if (!p.check(b)) {
 				newPuzz();
 			}
 			update();
 		} else if (e.getKeyCode() == e.VK_LEFT) {
+			try {
+				sound(1);
+			} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			p.left();
 			if (!p.check(b)) {
 				p.right();
 			}
 			update();
 		} else if (e.getKeyCode() == e.VK_RIGHT) {
+			try {
+				sound(1);
+			} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			p.right();
 			if (!p.check(b)) {
 				p.left();
